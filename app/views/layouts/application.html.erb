@@ -10,7 +10,18 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class = "content">
+    <header class = "header">
+    </header>
+
+    <% flash.each do |key, value| %>
+        <%= content_tag(:div,value, class: "#{key}") %>
+    <% end %>
+      
     <%= yield %>
+
+    <footer class = "footer">
+      <p>Copyright © 2023 DIVE INC ALL RIGHTS RESERVED.</p>
+    </footer>
   </body>
 </html>
