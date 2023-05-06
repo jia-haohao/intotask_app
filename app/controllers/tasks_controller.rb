@@ -3,6 +3,9 @@ class TasksController < ApplicationController
 
   def index
     @tasks = Task.all  
+    # @title = Task.group(:title).pluck(:title).sort
+    @tasks = Task.order(created_at: :desc)
+
   end
 
   def new

@@ -1,3 +1,16 @@
+herokuへデプロイの手順
+-  heroku login
+-  heroku create
+-  Gemfileにgem 'net-smtp', gem 'net-imap', gem 'net-pop'追加し、
+-  bundle install
+-  heroku buildpacks:set heroku/ruby
+-  heroku buildpacks:add --index 1 heroku/nodejs
+-  bundle lock --add-platform x86_64-linux
+-  heroku stack:set heroku-20
+-  heroku run rails db:migrate
+-  git add .
+-  git commit -m "init"
+-  git push heroku master
 ###  ユーザ (user)
 
 | カラム名        | データ型    |
