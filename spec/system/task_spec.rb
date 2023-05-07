@@ -5,7 +5,6 @@ RSpec.describe 'タスク管理機能', type: :system do
     context 'タスクを新規作成した場合' do
       it '作成したタスクが表示される' do
         visit new_task_path
-        # binding.pry
         fill_in "task_title", with: 'task'
         fill_in "task_content", with: '卒業発表会'
         select '低', from: 'task_priority'
