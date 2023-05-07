@@ -7,7 +7,8 @@ class TasksController < ApplicationController
       @tasks = Task.order(deadline: :desc).page(params[:page]).per(PER)
       # binding.irb 
     elsif params[:sort_priority]
-      @tasks = Task.order("priority::integer ASC").page(params[:page]).per(PER)
+      # @tasks = Task.order("priority::integer ASC").page(params[:page]).per(PER)
+      @tasks = Task.order(priority: :asc).page(params[:page]).per(PER)
     elsif
       @tasks = Task.order(created_at: :desc).page(params[:page]).per(PER)
     end
