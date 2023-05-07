@@ -5,7 +5,7 @@
       <th>内容</th>
       <th>優先順位</th>
       <th>ステータス</th>
-      <th>終了期限</th>
+      <th><%= link_to "終了期限", tasks_path(sort_expired: "true") %></th>
     </tr>
 <% @tasks.each do |task| %>
   <tr class = 'task_li'>
@@ -15,9 +15,9 @@
     <td><%= task.status %></td>
     <td><%= task.deadline %></td>
 
-    <td><%= link_to '詳細', task_path(task.id) %></td>
-    <td><%= link_to '編集', edit_task_path(task.id), data: { confirm: '本当に編集していいですか？'} %></td>
-    <td><%= link_to '削除', task_path(task.id), method: :delete, data: { confirm: '本当に削除していいですか？'} %></td>
+    <td><%= link_to '詳細', task_path(task.id), class: 'btn btn-success' %></td>
+    <td><%= link_to '編集', edit_task_path(task.id), data: { confirm: '本当に編集していいですか？'}, class: 'btn btn-success' %></td>
+    <td><%= link_to '削除', task_path(task.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-success' %></td>
   </tr>
 <% end %>
 </table>

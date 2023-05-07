@@ -2,9 +2,11 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.all  
     # @title = Task.group(:title).pluck(:title).sort
     @tasks = Task.order(created_at: :desc)
+    if params[:sort_expired]
+      @tasks = Task.order(deadline: :desc)
+    end
 
   end
 
@@ -18,7 +20,7 @@ class TasksController < ApplicationController
       render :new
     else
       if @task.save 
-        redirect_to tasks_path, notice: "タスクを作成しました!"
+        redirect_to tasks_path, notice: "タスク「#{@task.name}」を作成しました!"
       else
         render :new 
       end
