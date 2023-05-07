@@ -1,13 +1,27 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
+  PER = 10
   def index
-    # @title = Task.group(:title).pluck(:title).sort
-    @tasks = Task.order(created_at: :desc)
     if params[:sort_expired]
-      @tasks = Task.order(deadline: :desc)
+      @tasks = Task.order(deadline: :desc).page(params[:page]).per(PER)
+      # binding.irb 
+    elsif params[:sort_priority]
+      @tasks = Task.order(priority: :asc).page(params[:page]).per(PER)
+      # @tasks = Tasks.sort_priority.paginate(params)
+    elsif
+      @tasks = Task.order(created_at: :desc).page(params[:page]).per(PER)
     end
 
+    if params[:search].present?
+      if params[:title].present? && params[:status].present?
+        @tasks = Task.get_by_title(params[:title]).get_by_status(params[:status]).page(params[:page]).per(PER)
+      elsif params[:title].present?
+          @tasks = Task.get_by_title(params[:title]).page(params[:page]).per(PER)
+      elsif params[:status].present?
+          @tasks = Task.get_by_status(params[:status]).page(params[:page]).per(PER)
+      end
+    end
   end
 
   def new
@@ -20,7 +34,7 @@ class TasksController < ApplicationController
       render :new
     else
       if @task.save 
-        redirect_to tasks_path, notice: "タスク「#{@task.name}」を作成しました!"
+        redirect_to tasks_path, notice: "タスクを作成しました!"
       else
         render :new 
       end
