@@ -97,3 +97,9 @@ h1 {
   margin: 25px 0px;
   text-align: center;
 }
+
+th {
+  color:blue;
+  margin: 0px;
+  padding: 0px;
+}
