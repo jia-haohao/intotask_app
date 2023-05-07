@@ -1,0 +1,7 @@
+<h1 class = "container"><%= @user.name %>のページ</h1>
+<div class = "container">
+  <p>メールアドレス: <%= @user.email %></p>
+
+  <%= link_to "task投稿", new_task_path, class: 'btn btn-info' %>
+  <br>
+</div>
