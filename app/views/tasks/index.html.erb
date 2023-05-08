@@ -14,6 +14,7 @@
 <br>
 <table class= "container-fluid">
     <tr>
+      <th>登録者</th>    
       <th>タスク名</th>    
       <th>詳しい内容</th>
       <th><%= link_to "優先度", tasks_path(sort_priority: "true") %></th>
@@ -23,6 +24,7 @@
     </tr>
 <% @tasks.each do |task| %>
   <tr>
+    <td><%= current_user.name %></td>
     <td class= 'task_li'><%= task.title %></td>
     <td><%= task.content %></td>
     <td class = 'task_row'><%= task.priority %></td>

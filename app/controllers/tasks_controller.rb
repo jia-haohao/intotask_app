@@ -4,22 +4,22 @@ class TasksController < ApplicationController
   PER = 10
   def index
     if params[:sort_expired]
-      @tasks = Task.order(deadline: :desc).page(params[:page]).per(PER)
+      @tasks = current_user.tasks.order(deadline: :desc).page(params[:page]).per(PER)
       # binding.irb 
     elsif params[:sort_priority]
       # @tasks = Task.order("priority::integer ASC").page(params[:page]).per(PER)
-      @tasks = Task.order(priority: :asc).page(params[:page]).per(PER)
+      @tasks = current_user.tasks.order(priority: :asc).page(params[:page]).per(PER)
     elsif
-      @tasks = Task.order(created_at: :desc).page(params[:page]).per(PER)
+      @tasks = current_user.tasks.order(created_at: :desc).page(params[:page]).per(PER)
     end
 
     if params[:search].present?
       if params[:title].present? && params[:status].present?
-        @tasks = Task.get_by_title(params[:title]).get_by_status(params[:status]).page(params[:page]).per(PER)
+        @tasks = current_user.tasks.get_by_title(params[:title]).get_by_status(params[:status]).page(params[:page]).per(PER)
       elsif params[:title].present?
-          @tasks = Task.get_by_title(params[:title]).page(params[:page]).per(PER)
+          @tasks = current_user.tasks.get_by_title(params[:title]).page(params[:page]).per(PER)
       elsif params[:status].present?
-          @tasks = Task.get_by_status(params[:status]).page(params[:page]).per(PER)
+          @tasks = current_user.tasks.get_by_status(params[:status]).page(params[:page]).per(PER)
       end
     end
   end
