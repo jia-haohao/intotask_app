@@ -8,4 +8,22 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6 } 
 
   has_many :tasks, dependent: :destroy
+  before_destroy :destroy_action
+  before_update :update_action
+
+  private 
+
+  def destroy_action
+    if User.where(admin: true).count == 1 && self.admin
+      throw(:abort)
+    end
+  end
+
+  def update_action
+    user = User.find_by(admin: true)
+    if User.where(admin: true).count == 1 && user.present? && self.admin == false
+      errors.add(:admin, '管理ユーザーから外せません。最低一人の管理者が必要です')
+      throw(:abort)
+    end
+  end
 end

@@ -54,7 +54,7 @@ class Admin::UsersController < ApplicationController
 
   def require_admin 
     unless current_user.admin?
-      flash[:notice] = '権限がありません'
+      flash[:notice] = '管理者以外はアクセスできない'
       redirect_to root_path
     end
   end

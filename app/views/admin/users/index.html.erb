@@ -5,18 +5,17 @@
 <br>
   <table class= "container-fluid">
     <tr>
-      <th class>名前</th>
       <th class>メールアドレス</th>
       <th class>登録タスク数</th>
       <th class>管理者権限</th>
-      <th>メニュー</th>
+      <th class>名前</th>
       <th></th>
       <th></th>
     </tr>
   
     <% @users.each do |user| %>
       <tr class = 'user_row'>
-        <td><%= user.name %></td>
+        <%# <><%= user.name %>
         <td><%= user.email %></td>
         <td><%= user.tasks.count %>個</td>
         <td><%= user.admin? ? 'あり' : 'なし' %></td>
