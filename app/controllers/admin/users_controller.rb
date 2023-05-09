@@ -38,6 +38,7 @@ class Admin::UsersController < ApplicationController
       redirect_to admin_users_path, notice: " #{@user.name}さんを削除しました! "
     else
       redirect_to admin_users_path, notice: "最低一人の管理者が必要なため#{@user.name}さんを削除できません"
+    end
   end
 
   private 
@@ -53,7 +54,8 @@ class Admin::UsersController < ApplicationController
 
   def require_admin 
     unless current_user.admin?
-      flash[:danger] = '権限がありません'
-      redirect_to root_url
+      flash[:notice] = '権限がありません'
+      redirect_to root_path
+    end
   end
 end
