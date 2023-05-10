@@ -10,10 +10,16 @@ gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
+<<<<<<< HEAD
 gem 'bootstrap', '~> 4.4.1'
 gem 'jquery-rails'
 gem 'kaminari'
 gem 'bcrypt'
+=======
+gem 'net-smtp'
+gem 'net-imap'
+gem 'net-pop'
+>>>>>>> 75424d0d2415e99af442e90528bbb3854e6d3d63
 
 gem 'bootsnap', '>= 1.4.4', require: false
 
