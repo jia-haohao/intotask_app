@@ -1,0 +1,17 @@
+rebase #step5 in Gemfile
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# interactive rebase in progress; onto 359a540
+# Last commands done (5 commands done):
+#    pick 75424d0 herokuのset-url
+#    pick b019c5d 試して見て
+# Next commands to do (5 remaining commands):
+#    pick 8d75218 Merge remote-tracking branch 'heroku/master'
+#    pick 51a8329 heroku init
+# You are currently rebasing branch 'step5' on '359a540'.
+#
+# Changes to be committed:
+#	modified:   Gemfile
+#
