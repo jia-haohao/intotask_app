@@ -15,7 +15,6 @@
   
     <% @users.each do |user| %>
       <tr class = 'user_row'>
-        <%# <><%= user.name %>
         <td><%= user.email %></td>
         <td><%= user.tasks.count %>個</td>
         <td><%= user.admin? ? 'あり' : 'なし' %></td>

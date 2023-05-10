@@ -1,6 +1,13 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
-  let!(:task) { FactoryBot.create(:task) }
+  let!(:user) { FactoryBot.create(:user) }
+  let!(:task) { FactoryBot.create(:task, user: user) }
+  before do
+    visit new_session_path
+    fill_in 'session[email]', with: 'test@example.com'
+    fill_in 'session[password]', with: 'password'
+    click_button 'ログイン'
+  end
   describe '新規作成機能' do
     context 'タスクを新規作成した場合' do
       it '作成したタスクが表示される' do
@@ -25,8 +32,8 @@ RSpec.describe 'タスク管理機能', type: :system do
   end
   
     before do
-      FactoryBot.create(:task, title: "task")
-      FactoryBot.create(:second_task, title: "task2")
+      FactoryBot.create(:task, title: "task", user: user)
+      FactoryBot.create(:second_task, title: "task2", user: user)
     end
     describe '優先順位での並び変え' do
       context '優先順位でソートするボタンを押した場合' do
@@ -88,28 +95,21 @@ RSpec.describe 'タスク管理機能', type: :system do
         end
       end
     end
-  end
 
   describe '一覧表示機能' do
     context '一覧画面に遷移した場合' do
       it '登録済みのタスク一覧が表示される' do
-        FactoryBot.create(:task, title: 'タイトル',  content: '書類作成')
+        FactoryBot.create(:task, title: 'タイトル',  content: '書類作成', user: user)
         visit tasks_path
         expect(page).to have_content '書類作成'
       end
     end
-    context '一覧画面に遷移した場合' do
-      it '登録済みのタスク一覧が表示される' do
-        FactoryBot.create(:task, title: 'タイトル',  content: '書類作成')
-        visit tasks_path
-        expect(page).to have_content '書類作成'
-      end
-    end
+  end
 
   describe '詳細表示機能' do
     context '任意のタスク詳細画面に遷移した場合' do
       it '該当タスクの内容が表示される' do
-        @task = FactoryBot.create(:task, title: 'task', content: '卒業発表会')
+        @task = FactoryBot.create(:task, title: 'task', content: '卒業発表会', user: user)
         visit task_path(@task.id)
         expect(page).to have_content '詳細'
       end

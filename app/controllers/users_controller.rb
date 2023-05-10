@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show]
+  before_action :mypage_user!, only: [:show]
+  before_action :authenticate_user!, only: [:new, :create]
   skip_before_action :login_required, only: [:new, :create]
+
   def new
     if logged_in?
       flash[:notice] = 'ログアウトしてから新規ユーザーを登録して下さい'
@@ -20,7 +24,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
     @tasks = @user.tasks.all
     # unless params[:admin].present?
     #   return redirect_to tasks_path if current_user.id != @user.id
@@ -28,6 +31,9 @@ class UsersController < ApplicationController
   end
 
   private
+  def set_user
+    @user = User.find(params[:id])
+  end
 
   def user_params
     params.require(:user).permit(:name,:email,:password,
