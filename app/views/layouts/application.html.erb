@@ -10,14 +10,32 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class = "content">
+  <body >
     <header class = "header">
+    <ul class = "clearfix">
+      <% if logged_in? %>
+        <li><%= link_to "マイページ", user_path(current_user.id), class: 'nav-link' %></li>
+        <li><%= link_to "ログアウト", session_path(current_user.id), method: :delete, class: 'nav-link' %></li>
+        <li><%= link_to "タスクを見る", tasks_path, class: 'nav-link' %></li>
+        <%# <% if current_user.admin? %> 
+        <li><%= link_to '管理画面', admin_users_path, class: 'nav-link' %></li>
+        <%# <% end %> 
+      <% else %>
+        <li><%= link_to "新規登録", new_user_path, class: 'nav-link' %></li>
+        <li><%= link_to "ログイン", new_session_path, class: 'nav-link' %></li>
+      <% end %>
+    </ul>
     </header>
 
-    <% flash.each do |key, value| %>
-        <%= content_tag(:div,value, class: "#{key}") %>
-    <% end %>
-      
+    <%# <% flash.each do |key, value| %>
+        <%# <%= content_tag(:div,value, class: "#{key}") %> 
+    <%# <% end %> 
+
+    <div class="container"> 
+      <% if flash.notice.present? %>
+       <div class="alert alert-success"><%= flash.notice %></div>
+      <% end %>
+    </div>
     <%= yield %>
 
     <footer class = "footer">

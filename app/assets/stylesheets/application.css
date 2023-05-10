@@ -22,9 +22,12 @@
 .header {
   height: 60px;
   width: 100%;
-  /* float: right; */
-  /* padding-top: 0px; */
-  background-color:darkgoldenrod;
+  font-family: Georgia;
+  /* font-family: monospace; */
+  font-size: 20px;
+  /* padding: 20px; */
+  /* padding-right: 40px; */
+  background-color:coral;
 }
 
 .container {
@@ -59,11 +62,13 @@ li {
   font-size: 20px;
   color: darkorchid;
   margin-right: 20px;
+  float: left;
 }
 
 p {
   color:blueviolet;
   font-size: 20px;
+  text-align: center;
 }
 
 .footer {

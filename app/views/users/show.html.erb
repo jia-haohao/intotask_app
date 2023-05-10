@@ -1,17 +1,8 @@
-<h1>タスク一覧</h1>
-<div>
-  <%= form_with(url:tasks_path,local: true,method: :get) do |form| %>
-    <%= form.label :title,'タスク名検索' %>
-    <%= form.text_field :title, size: 50, value: params[:title] %>
-    <%= form.label :status,'ステータス検索' %>
-    <%= form.select :status,Task.statuses.keys,selected: params[:status],include_blank:"選択" %>
-    <%= form.hidden_field :search, value: 'true' %>
-    <%= form.submit '検索', class: 'btn btn-light' %>
-  <% end %>
-</div>
-<%= link_to '新規登録', new_task_path, class: "btn btn-primary" %>
+<h1><%= @user.name %>さんのページ</h1>
+<p>名前: <%= @user.name %></p>
+<p>メールアドレス: <%= @user.email %></p> 
 <br>
-<br>
+<% if @user.tasks.present? %>
 <table class= "container-fluid">
     <tr>
       <th>登録者</th>    
@@ -38,6 +29,6 @@
   </tr>
 <% end %>
 </table>
-
-<br>
-<%= paginate @tasks %>
+<% else %>
+  <%= '当ユーザーの作成したタスクはありません' %>
+<% end %>

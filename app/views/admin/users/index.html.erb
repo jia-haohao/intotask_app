@@ -1,0 +1,28 @@
+<div>
+<h1>ユーザー管理画面</h1>
+<br>
+<%= link_to '新規登録',new_admin_user_path, class: 'btn btn-primary' %>
+<br>
+  <table class= "container-fluid">
+    <tr>
+      <th class>メールアドレス</th>
+      <th class>登録タスク数</th>
+      <th class>管理者権限</th>
+      <th class>名前</th>
+      <th></th>
+      <th></th>
+    </tr>
+  
+    <% @users.each do |user| %>
+      <tr class = 'user_row'>
+        <td><%= user.email %></td>
+        <td><%= user.tasks.count %>個</td>
+        <td><%= user.admin? ? 'あり' : 'なし' %></td>
+        <td><%= link_to user.name, [:admin, user] %></td>
+        <td><%= link_to "編集", edit_admin_user_path(user), class: 'btn btn-primary mr-3' %></td>
+        <td><%= link_to "削除", [:admin, user], method: :delete, data: { confirm: '本当に削除しますか？'}, class: 'btn btn-danger' %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
