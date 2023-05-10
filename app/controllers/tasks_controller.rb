@@ -5,9 +5,7 @@ class TasksController < ApplicationController
   def index
     if params[:sort_expired]
       @tasks = current_user.tasks.order(deadline: :desc).page(params[:page]).per(PER)
-      # binding.irb 
     elsif params[:sort_priority]
-      # @tasks = Task.order("priority::integer ASC").page(params[:page]).per(PER)
       @tasks = current_user.tasks.order(priority: :asc).page(params[:page]).per(PER)
     elsif
       @tasks = current_user.tasks.order(created_at: :desc).page(params[:page]).per(PER)
