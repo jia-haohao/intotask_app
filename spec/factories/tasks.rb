@@ -5,7 +5,7 @@ FactoryBot.define do
     deadline { '2020-04-01'}
     priority { '高' }
     status {'完了'}
-    # user { }
+  
   end
   factory :second_task, class: Task do
     title { 'task2' }

@@ -25,12 +25,10 @@ class UsersController < ApplicationController
 
   def show
     @tasks = @user.tasks.all
-    # unless params[:admin].present?
-    #   return redirect_to tasks_path if current_user.id != @user.id
-    # end
   end
 
   private
+  
   def set_user
     @user = User.find(params[:id])
   end

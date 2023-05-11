@@ -5,8 +5,11 @@
     <%= form.text_field :title, size: 50, value: params[:title] %>
     <%= form.label :status,'ステータス検索' %>
     <%= form.select :status,Task.statuses.keys,selected: params[:status],include_blank:"選択" %>
+    <%= form.label :label_id,'ラベル検索' %>
+    <%= form.select :label_id, Label.pluck(:name, :id), { include_blank: true } %>
+    <!-- <%= form.select :label_id, options_for_select(Label.pluck(:name, :id)), { include_blank: true } %> -->
     <%= form.hidden_field :search, value: 'true' %>
-    <%= form.submit '検索', class: 'btn btn-light' %>
+    <%= form.submit '検索', class: 'btn btn-light btn-sm' %>
   <% end %>
 </div>
 <%= link_to '新規登録', new_task_path, class: "btn btn-primary" %>
@@ -21,9 +24,10 @@
       <th>ステータス</th>
       <th>登録日時</th>
       <th><%= link_to "終了期限", tasks_path(sort_expired: "true") %></th>
+      <th><%= link_to "ラベル", tasks_path(sort_expired: "true") %></th>
     </tr>
 <% @tasks.each do |task| %>
-  <tr>
+  <tr class= 'task_all'>
     <td><%= current_user.name %></td>
     <td class= 'task_li'><%= task.title %></td>
     <td><%= task.content %></td>
@@ -31,6 +35,11 @@
     <td><%= task.status %></td>
     <td><%= task.created_at.strftime('%Y-%m-%d') %></td>
     <td class = 'task_limit'><%= task.deadline %></td>
+    <td>
+      <% task.labels.each do |label| %>
+        <%= label.name %>
+      <% end %>
+    </td>
 
     <td><%= link_to '詳細', task_path(task.id), class: 'btn btn-success' %></td>
     <td><%= link_to '編集', edit_task_path(task.id), data: { confirm: '本当に編集していいですか？'}, class: 'btn btn-success' %></td>
