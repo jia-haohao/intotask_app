@@ -1,7 +1,13 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
   let!(:user) { FactoryBot.create(:user) }
+  let!(:label1){FactoryBot.create(:label_1)}
+  let!(:label2){FactoryBot.create(:label_2)}
+  let!(:label3){FactoryBot.create(:label_3)}
   let!(:task) { FactoryBot.create(:task, user: user) }
+  before do
+    task.labels << [label1,label2]
+  end
   before do
     visit new_session_path
     fill_in 'session[email]', with: 'test@example.com'
@@ -19,6 +25,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         select '2022',from: 'task_deadline_1i'
         select '11',from: 'task_deadline_2i'
         select '3',from: 'task_deadline_3i'
+        # select 'ラベル１', from: 'task_label'
         click_on '登録する'
         expect(page).to have_content 'task'
         expect(page).to have_content '卒業発表会'
@@ -27,6 +34,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(page).to have_content '2022'
         expect(page).to have_content '11'
         expect(page).to have_content '3'
+        # expect(page).to have_content 'ラベル１'
       end
     end
   end
@@ -80,7 +88,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       context 'ステータス検索をした場合' do
         it "ステータスに完全一致するタスクが絞り込まれる" do
           visit tasks_path
-          select '未着手', from: '検索'
+          select '未着手', from: 'ステータス検索'
           expect(page).to have_select('検索', selected: '未着手')
         end
       end
@@ -89,7 +97,7 @@ RSpec.describe 'タスク管理機能', type: :system do
           visit tasks_path
           # binding.pry
           fill_in "検索", with: 'task2'
-          select '着手', from: '検索'
+          select '着手', from: 'ステータス検索'
           click_on '検索'
           expect(page).to have_select('検索', selected: '着手')
         end
