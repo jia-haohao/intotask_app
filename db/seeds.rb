@@ -70,3 +70,4 @@ end
 #   taggings_list << { task_id: task_id, tag_id: rand(1..10) }
 # end
 # Tagging.create!(taggings_list)
+end
