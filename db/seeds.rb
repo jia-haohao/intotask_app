@@ -31,6 +31,6 @@ end
 end    
 
 10.times do |n|
-  label = Faker::Games::Pokemon.name
+  label = Faker::Name.name
   Label.create!(name: label)
 end
