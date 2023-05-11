@@ -5,7 +5,7 @@ User.create!(name:  "管理者",
             admin: true)
 
 10.times do |n|
-  name = Faker::Games::Pokemon.name
+  name = Faker::Name.name
   email = Faker::Internet.email
   password = "password"
   User.create!(name: name,
