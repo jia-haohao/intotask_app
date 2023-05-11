@@ -15,6 +15,9 @@ gem 'jquery-rails'
 gem 'kaminari'
 gem 'bcrypt'
 gem 'faker'
+gem 'net-smtp'
+gem 'net-imap'
+gem 'net-pop'
 
 gem 'bootsnap', '>= 1.4.4', require: false
 
